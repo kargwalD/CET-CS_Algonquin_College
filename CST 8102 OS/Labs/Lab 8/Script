@@ -1,0 +1,73 @@
+#! /bin/bash
+
+#This script file performs user management processes as per the user's instructions
+
+option=n
+
+while [ "$option" != "Q" ] && [ "$option" != "q" ]
+do
+	echo "Choose one of the following options"
+ 	echo "A Create a user account"
+ 	echo "B Delete a user account"
+ 	echo "C Change supplementary group for a user account"
+ 	echo "D Change initial group for a user account"
+ 	echo "E Change login shell for a user account"
+ 	echo "F Change account expiration date for a user account"
+	echo "Q Quit"
+
+	read -p "What would you like to do?: " option
+	
+	if [ "$option" = "A" ] || [ "$option" = "a" ]
+	then
+		read -p "Enter username: " username
+		read -p "Enter home directory (using absolute path): " homeDirectory
+	      	read -p "Enter default login shell (using absolute path): " loginShell
+
+		sudo useradd -d $homeDirectory -m -s $loginShell $username
+	
+	elif [ "$option" = "B" ] || [ "$option" = "b" ]
+	then
+		read -p "Enter username to be deleted: " delUserName
+	
+		sudo userdel -r $delUserName
+		sudo groupdel $delUserName
+
+	elif [ "$option" = "C" ] || [ "$option" = "c" ]
+	then
+		read -p "Enter username for whom the supplementary group is to be changed: " username
+		read -p "Enter the new supplementary group name: " supplmGroup
+
+		sudo usermod -G $supplmGroup $username
+	
+	elif [ "$option" = "D" ] || [ "$option" = "d" ]
+	then
+		read -p "Enter username for whom initial group is to be changed: " username
+		read -p "Enter the new initial group name: " initGroup
+
+		sudo usermod -g $initGroup $username
+	
+	elif [ "$option" = "E" ] || [ "$option" = "e" ]
+	then
+		read -p "Enter username for whom the default login shell is to be changed: " username
+		read -p "Enter new default login shell (using absolute path): " shellname
+
+		sudo chsh -s $shellname $username
+
+	elif [ "$option" = "F" ] || [ "$option" = "f" ]
+	then
+		read -p "Enter username for whom expiration date is to be entered: " username
+		read -p "Enter the expiration date (in YYYY-MM-DD format): " expiryDate
+
+		sudo usermod -e $expiryDate $username	
+	
+	elif [ "$option" = "Q" ] || [ "$option" = "q" ]
+	then
+		echo "Goodbye... Have a nice day"
+
+	else
+		echo "Invalid input... pls try again"
+	fi
+
+	sleep 3
+	clear
+done
