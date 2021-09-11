@@ -1,0 +1,27 @@
+import java.util.Scanner;
+
+public class Assignment01 {
+	public static void main(String[] args) {
+		
+	Scanner scan = new Scanner(System.in);
+	double a,b,c;
+	System.out.print("Enter the first number: "); // to take in the input from user
+	a=scan.nextDouble();
+	System.out.print("Enter the second number: ");
+	b=scan.nextDouble();
+	System.out.print("Enter the third number: ");
+	c=scan.nextDouble();
+	
+		System.out.println("\nThe first number is "+a+"\nThe second number is "+b+"\nThe third number is "+c);
+		System.out.print("\nThe sum is "+(a+b+c)); // to calculate sum
+		System.out.print("\nThe average is "+(a+b+c)/3); // to calculate the average
+		System.out.print("\nThe square root of the sum of all the numbers is "+Math.sqrt((a+b+c)));
+		System.out.print("\nThe first number raised to the second number is "+Math.pow(a, b));
+		System.out.print("\nThe second number raised to the third number is "+Math.pow(b, c));
+		System.out.print("\nThe third number raised to the first number is "+Math.pow(c, a));
+		System.out.print("\nThe name of the author is Dhruv Kargwal"); //to display the name of author
+	
+	scan.close();
+	
+	}
+}
